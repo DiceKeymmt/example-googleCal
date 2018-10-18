@@ -14,15 +14,16 @@ const scopes = [
 ];
 
 
+const keyPath = path.join(__dirname, '../private/client_secret.json');
+
 let keys = {
     client_id: '',
     client_secret: '',
     redirect_uris: ''
 };
 
-if (fs.existsSync(__dirname, '../private/client_secret.json')) {
-    const keyPath = path.join(__dirname, '../private/client_secret.json');
-    keys = fs.readFileSync(keyPath).web;
+if (fs.existsSync(keyPath)) {
+    keys = JSON.parse(fs.readFileSync(keyPath)).web;
 } else {
     keys.client_id = 'test',
     keys.client_secret = 'test',
