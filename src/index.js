@@ -27,7 +27,7 @@ if (fs.existsSync(keyPath)) {
 } else {
     keys.client_id = process.env.CLIENT_ID,
     keys.client_secret = process.env.CLIENT_SECRET,
-    keys.redirect_uris = process.env.REDIRECT_URIS[0]
+    keys.redirect_uris = process.env.REDIRECT_URIS.split(' ')[0]
 }
 
 console.log(keys);
