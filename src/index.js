@@ -4,6 +4,7 @@ const url = require('url');
 const path = require('path');
 const fs = require('fs');
 const { google } = require('googleapis');
+const opn = require('opn');
 
 const scopes = [
     'https://www.googleapis.com/auth/calendar',
@@ -27,7 +28,24 @@ if (fs.existsSync(keyPath)) {
 } else {
     keys.client_id = process.env.CLIENT_ID,
     keys.client_secret = process.env.CLIENT_SECRET,
-    keys.redirect_uris = process.env.REDIRECT_URIS.split(' ')[0]
+    keys.redirect_uris = process.env.REDIRECT_URIS.split(' ')
 }
 
-console.log(keys);
+const oauth2Client = new google.auth.OAuth2(
+    keys.client_id,
+    keys.client_secret,
+    keys.redirect_uris[0]
+);
+
+const authorizeUrl = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: scopes
+});
+
+opn(authorizeUrl);
+
+const server = http.createServer();
+
+server.on('request', (req, res) => {
+    console.log(req.url)
+}).listen(process.env.PORT||8080);
