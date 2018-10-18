@@ -25,9 +25,9 @@ let keys = {
 if (fs.existsSync(keyPath)) {
     keys = JSON.parse(fs.readFileSync(keyPath)).web;
 } else {
-    keys.client_id = 'test',
-    keys.client_secret = 'test',
-    keys.redirect_uris = 'test'
+    keys.client_id = process.env.CLIENT_ID,
+    keys.client_secret = process.env.CLIENT_SECRET,
+    keys.redirect_uris = process.env.REDIRECT_URIS[0]
 }
 
 console.log(keys);
