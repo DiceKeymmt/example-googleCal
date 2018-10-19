@@ -26,7 +26,13 @@ const server = http.createServer();
 server.on('request', (req, res) => {
     switch (req.method) {
         case 'GET':
+            console.log('get')
             console.log(querystring.parse(url.parse(req.url)))
+            break;
+        
+        default:
+            console.log('not get');
+            break;
     }
 }).listen(process.env.PORT);
 
