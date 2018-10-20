@@ -21,7 +21,7 @@ const scopes = [
 const oauth2Client = new google.auth.OAuth2(
     process.env.CLIENT_ID,
     process.env.CLIENT_SECRET,
-    process.env.REDIRECT_URIS.split(' ')[1]
+    process.env.REDIRECT_URIS.split(' ')[0]
 );
 
 async function authenticate() {
