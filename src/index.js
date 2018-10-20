@@ -64,6 +64,7 @@ authenticate()
         const server = http.createServer();
 
         server.on('request', (req, res) => {
+            console.log(url.parse(req.url));
             switch (url.parse(req.url).pathname) {
                 case '/calendars':
                     switch (req.method) {
